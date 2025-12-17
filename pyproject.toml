@@ -5,6 +5,9 @@ description = ""
 authors = ["Hugh Warden <hugh.warden@outlook.com>"]
 readme = "README.md"
 
+[tool.poetry.scripts]
+wsimorph = "wsimorph.__main__:main"
+
 [tool.poetry.dependencies]
 python = "^3.11"
 numpy = "^2.3.5"
