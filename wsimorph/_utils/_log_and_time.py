@@ -64,7 +64,7 @@ def log_and_time(message: str) -> Callable[[Callable[..., Any]], Callable[..., A
                 elapsed, minimum_unit="milliseconds" if elapsed < 1 else "seconds"
             )
             WSIM_CLI_LOGGER.info(f"[COMPLETED] {message} in {print_time}.")
-            wrapper.elapsed_time = elapsed
+            wrapper.elapsed_time = elapsed  # type: ignore[attr-defined]
             return result
 
         return wrapper
