@@ -1,5 +1,7 @@
+from ._utils._cli_args import get_cli_args
+
 def main() -> None:
-    pass
+    args = get_cli_args()
 
 
 if __name__ == "__main__":
