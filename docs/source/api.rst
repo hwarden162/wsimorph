@@ -1,10 +1,18 @@
 API Reference
 =============
 
-wsimorph.images
----------------
+wsimorph.image
+--------------
 
-.. automodule:: wsimorph.images
+.. automodule:: wsimorph.image
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+wsimorph.io
+-----------
+
+.. automodule:: wsimorph.io
    :members:
    :undoc-members:
    :show-inheritance:

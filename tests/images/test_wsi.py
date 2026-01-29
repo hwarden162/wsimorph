@@ -1,6 +1,6 @@
 import pytest
 
-from wsimorph.images._wsi import WSI
+from wsimorph.image._wsi import WSI
 
 def test_wsi_validation():
     test_path = "tests/_test_data/small_tiff.tiff"

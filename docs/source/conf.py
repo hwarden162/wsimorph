@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.abspath("../.."))
 # Mock heavy imports that cannot load in docs
 autodoc_mock_imports = [
     "openslide",   # core openslide library
-    "images",     # if you have a local private module
+    "image",     # if you have a local private module
 ]
 
 # -- Project information -----------------------------------------------------
