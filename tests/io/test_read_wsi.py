@@ -1,7 +1,6 @@
 from pathlib import Path
 import pytest
 
-from wsimorph.image import WSI
 from wsimorph.io import read_wsi
 
 def test_read_wsi_validation():
