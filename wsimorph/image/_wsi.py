@@ -23,6 +23,7 @@ def _get_vendor(slide: OpenSlide) -> str:
         raise TypeError("Vendor name is not a string.")
     return vendor
 
+
 def _get_level_count(slide: OpenSlide) -> int:
     """
     Calculates and retrieves the number of levels available in an OpenSlide object.
@@ -42,6 +43,7 @@ def _get_level_count(slide: OpenSlide) -> int:
     if not isinstance(level_count, int):
         raise TypeError("Level count is not an integer.")
     return level_count
+
 
 def _get_dimensions(slide: OpenSlide) -> tuple[int, int]:
     """
@@ -65,6 +67,7 @@ def _get_dimensions(slide: OpenSlide) -> tuple[int, int]:
     if not isinstance(dimensions[0], int) or not isinstance(dimensions[1], int):
         raise TypeError("Dimensions are not integers.")
     return dimensions
+
 
 def _get_level_dimensions(slide: OpenSlide) -> tuple[tuple[int, int], ...]:
     """
@@ -95,6 +98,7 @@ def _get_level_dimensions(slide: OpenSlide) -> tuple[tuple[int, int], ...]:
             raise TypeError("Level dimensions are not integers.")
     return level_dimensions
 
+
 def _get_level_downsamples(slide: OpenSlide) -> tuple[float, ...]:
     """
     Retrieves the level downsamples from an OpenSlide object.
@@ -122,6 +126,7 @@ def _get_level_downsamples(slide: OpenSlide) -> tuple[float, ...]:
             raise TypeError("Level downsamples are not floats.")
     return level_downsamples
 
+
 def _get_mpp_y(slide: OpenSlide) -> float:
     """
     Calculate the microns per pixel (MPP) in the y-direction (vertical) of a given
@@ -146,6 +151,7 @@ def _get_mpp_y(slide: OpenSlide) -> float:
     if not isinstance(mpp_y, float):
         raise TypeError("mpp-y is not a float.")
     return mpp_y
+
 
 def _get_mpp_x(slide: OpenSlide) -> float:
     """
@@ -172,6 +178,7 @@ def _get_mpp_x(slide: OpenSlide) -> float:
         raise TypeError("mpp-x is not a float.")
     return mpp_x
 
+
 def _get_mpp(mpp_y: float, mpp_x: float) -> float:
     """
     Calculate and validate the microns-per-pixel (MPP) value.
@@ -195,8 +202,9 @@ def _get_mpp(mpp_y: float, mpp_x: float) -> float:
     if mpp_y == 0 or mpp_x == 0:
         return 0.0
     if mpp_y != mpp_x:
-        return  0.0
+        return 0.0
     return mpp_y
+
 
 class WSI:
     """
@@ -231,6 +239,7 @@ class WSI:
     :ivar mpp: The overall microns per pixel value for the WSI.
     :type mpp: float
     """
+
     def __init__(self, path: Path) -> None:
         """
         Initializes an instance of the class representing a Whole Slide Image (WSI) file.
@@ -254,13 +263,15 @@ class WSI:
             self._vendor: str = _get_vendor(slide)
             self._level_count: int = _get_level_count(slide)
             self._dimensions: tuple[int, int] = _get_dimensions(slide)
-            self._level_dimensions: tuple[tuple[int, int], ...] = _get_level_dimensions(slide)
+            self._level_dimensions: tuple[tuple[int, int], ...] = _get_level_dimensions(
+                slide
+            )
             self._level_downsamples: tuple[float, ...] = _get_level_downsamples(slide)
             self._mpp_y: float = _get_mpp_y(slide)
             self._mpp_x: float = _get_mpp_x(slide)
             self._mpp: float = _get_mpp(self._mpp_y, self._mpp_x)
 
-    def pixels_from_microns(self, microns: float, level: int = 0.0) -> float:
+    def pixels_from_microns(self, microns: float, level: int = 0) -> float:
         """
         Converts a microns measurement to pixels based on the specified level of the WSI
         (Whole Slide Image). This method computes the equivalent pixels for the given microns
@@ -287,7 +298,9 @@ class WSI:
         if not isinstance(level, int):
             raise TypeError("Level must be an integer.")
         if level < 0 or level >= self._level_count:
-            raise ValueError(f"Level must be greater than or equal to zero and less than the level count of the WSI ({self._level_count}).")
+            raise ValueError(
+                f"Level must be greater than or equal to zero and less than the level count of the WSI ({self._level_count})."
+            )
         if self._mpp == 0:
             raise ValueError("WSI has no pixel size information.")
         return microns / (self._mpp * self._level_downsamples[level])

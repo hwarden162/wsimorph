@@ -1,7 +1,8 @@
 from pathlib import Path
 
+from .._utils._log_and_time import log_and_time # type: ignore[attr-defined]
 from ..image._wsi import WSI
-from .._utils._log_and_time import log_and_time
+
 
 @log_and_time("reading WSI")
 def read_wsi(path: Path | str) -> WSI:

@@ -30,6 +30,7 @@ class Tile:
     :ivar xhi_pad: The horizontal padding at the right boundary of the tile.
     :type xhi_pad: int
     """
+
     def __init__(
         self,
         image: np.ndarray,
@@ -69,7 +70,9 @@ class Tile:
         if not isinstance(level, int):
             raise TypeError("Level must be an integer.")
         if level < 0 or level >= parent_wsi.level_count:
-            raise ValueError("Level must be greater than or equal to zero and less than the level count of the WSI.")
+            raise ValueError(
+                "Level must be greater than or equal to zero and less than the level count of the WSI."
+            )
         if not isinstance(image, np.ndarray):
             raise TypeError("Image must be a numpy array.")
         if image.ndim != 3:
@@ -82,9 +85,19 @@ class Tile:
             raise TypeError("Start coordinates must be integers.")
         if y_start < 0 or x_start < 0:
             raise ValueError("Start coordinates must be non-negative.")
-        if image.shape[0] + y_start > parent_wsi.level_dimensions[level][0] or image.shape[1] + x_start > parent_wsi.level_dimensions[level][1]:
-            raise ValueError("Image dimensions exceed the dimensions of the parent WSI.")
-        if not isinstance(ylo_pad, int) or not isinstance(yhi_pad, int) or not isinstance(xlo_pad, int) or not isinstance(xhi_pad, int):
+        if (
+            image.shape[0] + y_start > parent_wsi.level_dimensions[level][0]
+            or image.shape[1] + x_start > parent_wsi.level_dimensions[level][1]
+        ):
+            raise ValueError(
+                "Image dimensions exceed the dimensions of the parent WSI."
+            )
+        if (
+            not isinstance(ylo_pad, int)
+            or not isinstance(yhi_pad, int)
+            or not isinstance(xlo_pad, int)
+            or not isinstance(xhi_pad, int)
+        ):
             raise TypeError("Padding values must be integers.")
         if ylo_pad < 0 or yhi_pad < 0 or xlo_pad < 0 or xhi_pad < 0:
             raise ValueError("Padding values must be non-negative.")
