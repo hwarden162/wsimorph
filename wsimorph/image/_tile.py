@@ -111,6 +111,7 @@ class Tile:
         self._yhi_pad = yhi_pad
         self._xlo_pad = xlo_pad
         self._xhi_pad = xhi_pad
+        self._parent_wsi = parent_wsi
 
     @property
     def image(self) -> np.ndarray:
@@ -143,3 +144,7 @@ class Tile:
     @property
     def xhi_pad(self) -> int:
         return self._xhi_pad
+
+    @property
+    def parent_wsi(self) -> WSI:
+        return self._parent_wsi

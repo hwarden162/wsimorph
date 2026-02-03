@@ -11,6 +11,7 @@ openslide-python = "^1.4.3"
 humanize = "^4.15.0"
 pillow = "^12.0.0"
 numpy = "^2.4.0"
+scikit-image = "^0.26.0"
 
 
 [build-system]
